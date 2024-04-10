@@ -1,0 +1,9 @@
+nacos:
+  host: 119.91.238.152
+  port: 8848
+  namespace: bf11f256-57ac-4ce4-94ee-2b5eed833df3
+  logDir: all-config/nacos/log
+  cacheDir: all-config/nacos/cache
+  logLevel: debug
+  dataId: user-srv
+  group: dev
