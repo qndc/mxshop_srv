@@ -1,0 +1,73 @@
+syntax = "proto3";
+
+option go_package = ".;proto";
+
+import "comm.proto";
+import "empty.proto";
+
+// 定义服务列表和入参出参
+service User{
+  //查询用户列表
+  rpc GetUserList(PageInfo) returns (UserListResp);
+  //通过手机号码查询用户（1-1）
+  rpc GetUserByMobile(MobileReq) returns (UserInfoResp);
+  //通过Id查询用户(1-1)
+  rpc GetUserById(IdReq) returns (UserInfoResp);
+  //创建用户
+  rpc CreateUser(CreateUserReq) returns (UserInfoResp);
+  //更新用户
+  rpc UpdateUser(UpdateUserReq) returns (Empty);
+  //验证用户密码
+  rpc VerifyPassword(VerifyPwdReq) returns (VerifyPwdResp);
+}
+
+message VerifyPwdReq{
+  string rawPwd = 1; //原始密码，用户输入的密码
+  string encodedPwd = 2; //加密后的密码,数据库保存的密码
+}
+
+message VerifyPwdResp{
+  bool isTrue = 1;
+}
+
+message MobileReq{
+  string Mobile = 1;
+}
+
+message IdReq{
+  uint32 id = 1;
+}
+
+message CreateUserReq{
+  string NikeName = 1;
+  string Mobile = 2;
+  string Password = 3;
+  uint64 Birthday = 4;
+  uint32 Gender = 5;
+  uint32 Role = 6;
+}
+
+message UpdateUserReq{
+  uint32 id = 1;
+  string NikeName = 2;
+  string Mobile = 3;
+  string Password = 4;
+  uint64 Birthday = 5;
+  uint32 Gender = 6;
+  uint32 Role = 7;
+}
+
+message UserInfoResp{
+  uint32 id = 1;
+  string NikeName = 2;
+  string Mobile = 3;
+  uint64 Birthday = 4;
+  uint32 Gender = 5;
+  uint32 Role = 6;
+  string Password=7;
+}
+
+message UserListResp{
+  uint32 total = 1;
+  repeated UserInfoResp records = 2;
+}

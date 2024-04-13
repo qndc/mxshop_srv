@@ -1,0 +1,7 @@
+syntax = "proto3";
+option go_package =".;proto";
+
+message PageInfo{
+  uint32 pageSize = 1;
+  uint32 pageNum = 5;
+}
